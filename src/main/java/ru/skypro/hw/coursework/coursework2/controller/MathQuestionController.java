@@ -9,15 +9,14 @@ import ru.skypro.hw.coursework.coursework2.domain.Question;
 import ru.skypro.hw.coursework.coursework2.service.QuestionService;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
-@RequestMapping("/exam/java")
-public class JavaQuestionController {
+@RequestMapping("/exam/math")
+public class MathQuestionController {
 
     private final QuestionService questionService;
 
-    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService questionService) {
+    public MathQuestionController(@Qualifier("mathQuestionService") QuestionService questionService) {
         this.questionService = questionService;
     }
 

@@ -1,24 +1,22 @@
 package ru.skypro.hw.coursework.coursework2.service;
 
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.skypro.hw.coursework.coursework2.domain.Question;
-import ru.skypro.hw.coursework.coursework2.repository.JavaQuestionRepository;
 import ru.skypro.hw.coursework.coursework2.repository.QuestionRepository;
 
 import java.util.*;
 
 @Service
-public class JavaQuestionService implements QuestionService {
+public class MathQuestionService implements QuestionService {
 
 
     private QuestionRepository questionRepository;
 
-    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
+
 
     @Override
     public int getSize() {
@@ -59,5 +57,6 @@ public class JavaQuestionService implements QuestionService {
         List<Question> question = questionRepository.getAll().stream().toList();
         return question.get(random.nextInt(getSize()));
     }
+
 
 }

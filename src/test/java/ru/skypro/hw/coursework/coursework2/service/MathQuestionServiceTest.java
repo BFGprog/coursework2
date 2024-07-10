@@ -7,29 +7,29 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.skypro.hw.coursework.coursework2.domain.Question;
-import ru.skypro.hw.coursework.coursework2.repository.JavaQuestionRepository;
+import ru.skypro.hw.coursework.coursework2.repository.MathQuestionRepository;
 
 import java.util.Collection;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-class JavaQuestionServiceTest {
+class MathQuestionServiceTest {
 
     @Mock
-    JavaQuestionRepository javaQuestionRepository;
+    MathQuestionRepository mathQuestionRepository;
 
     @InjectMocks
-    JavaQuestionService javaQuestionService = new JavaQuestionService(javaQuestionRepository);
-
+    MathQuestionService mathQuestionService = new MathQuestionService(mathQuestionRepository);
 
     @Test
     void add() {
         // Give
         Question expected = new Question("Test", "Test");
         // When
-        Question actual = javaQuestionService.add("Test", "Test");
+        Question actual = mathQuestionService.add("Test", "Test");
         // Then
         assertEquals(expected, actual);
     }
@@ -39,7 +39,7 @@ class JavaQuestionServiceTest {
         // Given
         Question expected = new Question("Test", "Test");
         // When
-        Question actual = javaQuestionService.add(expected);
+        Question actual = mathQuestionService.add(expected);
         // Then
         assertEquals(expected, actual);
     }
@@ -50,9 +50,9 @@ class JavaQuestionServiceTest {
         Question expected = new Question("Test", "Test");
         Collection<Question> questions = Set.of(expected);
         // When
-        Mockito.when(javaQuestionRepository.getAll()).thenReturn(questions);
-        Mockito.when(javaQuestionRepository.remove("Test", "Test")).thenReturn(expected);
-        Question actual = javaQuestionService.remove("Test", "Test");
+        Mockito.when(mathQuestionService.getAll()).thenReturn(questions);
+        Mockito.when(mathQuestionService.remove("Test", "Test")).thenReturn(expected);
+        Question actual = mathQuestionService.remove("Test", "Test");
         // Then
         assertEquals(expected, actual);
     }
@@ -62,7 +62,7 @@ class JavaQuestionServiceTest {
         // Given
         // When
         // Then
-        assertThrows(IllegalArgumentException.class, () -> javaQuestionService.remove("Test", "Test"));
+        assertThrows(IllegalArgumentException.class, () -> mathQuestionService.remove("Test", "Test"));
     }
 
 
@@ -71,8 +71,8 @@ class JavaQuestionServiceTest {
         // Given
         Collection<Question> expected = Set.of(new Question("Test", "Test"), new Question("Test1", "Test"));
         // When
-        Mockito.when(javaQuestionRepository.getAll()).thenReturn(expected);
-        Collection<Question> actual = javaQuestionService.getAll();
+        Mockito.when(mathQuestionService.getAll()).thenReturn(expected);
+        Collection<Question> actual = mathQuestionService.getAll();
         // Then
         org.assertj.core.api.Assertions.assertThat(expected).containsExactlyInAnyOrderElementsOf(actual);
 //        Assertions.assertEquals(expected, actual);

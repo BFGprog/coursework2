@@ -1,5 +1,6 @@
 package ru.skypro.hw.coursework.coursework2.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.skypro.hw.coursework.coursework2.domain.Question;
 import ru.skypro.hw.coursework.coursework2.exception.ExceedingTheListException;
@@ -11,8 +12,10 @@ import java.util.Random;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    private QuestionService questionService;
-    public ExaminerServiceImpl(QuestionService questionService) {
+    private final QuestionService questionService;
+
+
+    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService questionService) {
         this.questionService = questionService;
     }
 
