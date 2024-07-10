@@ -5,45 +5,58 @@ import org.springframework.stereotype.Service;
 import ru.skypro.hw.coursework.coursework2.domain.Question;
 import ru.skypro.hw.coursework.coursework2.exception.ExceedingTheListException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    private final QuestionService questionService;
+    private final QuestionService javaQuestionService;
+    private final QuestionService mathQuestionService;
 
 
-    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService questionService) {
-        this.questionService = questionService;
+    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
+                               @Qualifier("mathQuestionService") QuestionService mathQuestionService) {
+        this.javaQuestionService = javaQuestionService;
+        this.mathQuestionService = mathQuestionService;
     }
+
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-//        Random random = new Random();
-//        List<Question> questionsAll = new ArrayList<>(questionService.getAll());
-//        List<Question> questions = new ArrayList<>();
-//        if(amount > questionsAll.size()){
-//            throw new ExceedingTheListException();
-//        }
-//        for (; questions.size() < amount; ) {
-//            Question question = questionsAll.get(random.nextInt(questionsAll.size()));
-//            if (!questions.contains(question))
-//                questions.add(question);
-//        }
-//        return questions;
+        List<Question> javaQuestions = new ArrayList<>(getJavaQuestions(amount));
+        List<Question> mathQuestions = new ArrayList<>(getMathQuestions(amount));
 
-        if(amount > questionService.getSize()){
+        javaQuestions.addAll(mathQuestions);
+        return javaQuestions;
+    }
+
+    @Override
+    public Collection<Question> getJavaQuestions(int amount) {
+        if (amount > javaQuestionService.getSize()) {
             throw new ExceedingTheListException();
         }
-        List<Question> questions2 = new ArrayList<>();
-        for (; questions2.size() < amount; ) {
-            Question question = questionService.getRandomQuestion();
-            if (!questions2.contains(question))
-                questions2.add(question);
+        Set<Question> javaQuestions = new HashSet<>();
+        for (; javaQuestions.size() < amount; ) {
+            Question question = javaQuestionService.getRandomQuestion();
+            if (!javaQuestions.contains(question))
+                javaQuestions.add(question);
         }
-        return questions2;
+        return javaQuestions;
+    }
+    //
+
+    @Override
+    public Collection<Question> getMathQuestions(int amount) {
+        if (amount > mathQuestionService.getSize()) {
+            throw new ExceedingTheListException();
+        }
+        Set<Question> mathQuestions = new HashSet<>();
+        for (; mathQuestions.size() < amount; ) {
+            Question question = mathQuestionService.getRandomQuestion();
+            if (!mathQuestions.contains(question))
+                mathQuestions.add(question);
+        }
+        return mathQuestions;
     }
 
 }

@@ -31,7 +31,7 @@ public class JavaQuestionController {
         return questionService.remove(question, answer);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public Collection<Question> getAll(){
         return questionService.getAll();
     }
