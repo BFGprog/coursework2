@@ -47,16 +47,23 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public Collection<Question> getMathQuestions(int amount) {
-        if (amount > mathQuestionService.getSize()) {
-            throw new ExceedingTheListException();
-        }
         Set<Question> mathQuestions = new HashSet<>();
-        for (; mathQuestions.size() < amount; ) {
-            Question question = mathQuestionService.getRandomQuestion();
-            if (!mathQuestions.contains(question))
-                mathQuestions.add(question);
-        }
+        for (int i = 0; i < amount; i++) {
+            mathQuestions.add(mathQuestionService.getRandomQuestion());
+            }
         return mathQuestions;
+        }
+
+//        if (amount > mathQuestionService.getSize()) {
+//            throw new ExceedingTheListException();
+//        }
+//        Set<Question> mathQuestions = new HashSet<>();
+//        for (; mathQuestions.size() < amount; ) {
+//            Question question = mathQuestionService.getRandomQuestion();
+//            if (!mathQuestions.contains(question))
+//                mathQuestions.add(question);
+//        }
+//        return mathQuestions;
     }
 
-}
+
