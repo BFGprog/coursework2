@@ -23,12 +23,24 @@ class ExaminerServiceImplTest {
 
 
     @Mock
-    private JavaQuestionService javaQuestionService;
+    JavaQuestionService javaQuestionService;
     @Mock
-    private MathQuestionService mathQuestionService;
+    MathQuestionService mathQuestionService;
 
-    @InjectMocks
-    private ExaminerServiceImpl examinerService;
+    //in a setup or test method
+    ExaminerServiceImpl examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
+
+    // /////////////
+
+//    @Mock
+//    private JavaQuestionService javaQuestionService;
+//    @Mock
+//    private MathQuestionService mathQuestionService;
+//
+//    @InjectMocks
+//    private ExaminerServiceImpl examinerService;
+
+//    ////
 
 //    private final JavaQuestionService javaQuestionService = mock(JavaQuestionService.class);
 //    private final MathQuestionService mathQuestionService  = mock(MathQuestionService.class);

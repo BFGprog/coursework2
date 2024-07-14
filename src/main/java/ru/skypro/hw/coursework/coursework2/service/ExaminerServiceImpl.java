@@ -23,8 +23,10 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-        List<Question> javaQuestions = new ArrayList<>(getJavaQuestions(amount));
-        List<Question> mathQuestions = new ArrayList<>(getMathQuestions(amount));
+        int amountJava = amount / 2;
+        int amountMath = amount - amountJava;
+        List<Question> javaQuestions = new ArrayList<>(getJavaQuestions(amountJava));
+        List<Question> mathQuestions = new ArrayList<>(getMathQuestions(amountMath));
 
         javaQuestions.addAll(mathQuestions);
         return javaQuestions;
