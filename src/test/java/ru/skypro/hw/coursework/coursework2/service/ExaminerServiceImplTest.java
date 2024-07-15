@@ -28,7 +28,6 @@ class ExaminerServiceImplTest {
     MathQuestionService mathQuestionService;
 
     //in a setup or test method
-    ExaminerServiceImpl examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
 
     // /////////////
 
@@ -66,6 +65,8 @@ class ExaminerServiceImplTest {
 
     @Test
     void getJavaQuestionsException() {
+        ExaminerServiceImpl examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
+
         // Give
         int amount = 3;
         // When
@@ -76,6 +77,8 @@ class ExaminerServiceImplTest {
 
     @Test
     void getJavaQuestions() {
+        ExaminerServiceImpl examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
+
         // Give
         Collection<Question> expected = Set.of(new Question("Test1", "Test"));
 
@@ -90,6 +93,8 @@ class ExaminerServiceImplTest {
 
     @Test
     void getMathQuestions() {
+        ExaminerServiceImpl examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
+
         // Give
         Collection<Question> expected22 = Set.of(new Question("2+2=", "4"));
         int amount = 1;

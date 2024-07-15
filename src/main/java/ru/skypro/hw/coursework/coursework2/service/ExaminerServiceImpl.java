@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class ExaminerServiceImpl implements ExaminerService {
     private final QuestionService javaQuestionService;
     private final QuestionService mathQuestionService;
+    private final Random random = new Random();
 
 
     public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
@@ -23,7 +24,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-        int amountJava = amount / 2;
+        int amountJava = random.nextInt(amount);
         int amountMath = amount - amountJava;
         List<Question> javaQuestions = new ArrayList<>(getJavaQuestions(amountJava));
         List<Question> mathQuestions = new ArrayList<>(getMathQuestions(amountMath));
